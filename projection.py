@@ -98,6 +98,7 @@ if __name__ == "__main__":
     image_path = 'XXX/train/2023-04-08-02-33-11/left/20230408023909.400.jpg'
     pcd_path = 'XXX/train/2023-04-08-02-33-11/pcd/20230408023909.400.pcd'
     image = cv2.imread(image_path)
+    image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
     cloud = o3d.io.read_point_cloud(pcd_path)
     cloud = np.asarray(cloud.points)
 
