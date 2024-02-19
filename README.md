@@ -20,7 +20,7 @@ print('lidar to left camera translation:', calib_params["T"])
 ```
 Read image and pcd files:
 ```angular2html
-image = cv2.imread(image_path)
+image =  cv2.cvtColor(cv2.imread(image_path), cv2.COLOR_BGR2RGB)
 cloud = o3d.io.read_point_cloud(pcd_path)
 cloud = np.asarray(cloud.points)
 ```
