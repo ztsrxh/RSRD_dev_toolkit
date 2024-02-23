@@ -65,3 +65,21 @@ lon_origin = loc_pose_vel[0]["lon"]
 alt_origin = loc_pose_vel[0]["alt"]/1000  # mm --> m
 e, n, u = lla_to_enu(loc_pose_vel[4]["lat"], loc_pose_vel[4]["lon"], loc_pose_vel[4]["alt"]/1000, lat_origin, lon_origin, alt_origin)
 ```
+## cam_extrinsic.py
+This script calculate the camera extricsic `[R|T]` between two nearby frames.
+Here we take the first as origin, calculate the camera extrinsic of current-->origin 
+
+```angular2html
+current = loc_pose_vel[4]
+reference = loc_pose_vel[0]
+extrinsic = Extrinsic(is_half=True)  # is_half=True for the half-resolution subset
+R_equ, T_equ = extrinsic.get_cam_extr(current, reference)
+```
+
+The point (x,y,z) in the current camera's coordinate can be represented under the origin coordinate.
+Researchers can also get the other forms such as Euler angle and quaternion.
+
+```angular2html
+p_cur = [1, 1, 1]
+p_ori = np.matmul(R_equ, p_cur) + T_equ
+```
